@@ -1,4 +1,4 @@
- agent { label 'ubuntuslave2' }
+ agent any
     stages {
         stage('maven built'){
             steps{
