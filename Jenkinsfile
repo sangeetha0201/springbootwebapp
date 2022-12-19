@@ -18,7 +18,7 @@ pipeline {
             agent { label 'slave1'}
             steps {
                 script { 
-                  dockerImage = docker.build registry + ":$BUILD_NUMBER" 
+                 sh dockerImage = docker.build registry + ":$BUILD_NUMBER" 
             } 
             }
         }
@@ -26,7 +26,7 @@ pipeline {
             agent { label 'slave1'}
             steps { 
                 script { 
-                    docker.withRegistry( '', registryCredential ) { 
+                  sh  docker.withRegistry( '', registryCredential ) { 
                         dockerImage.push() 
                     }
                 } 
