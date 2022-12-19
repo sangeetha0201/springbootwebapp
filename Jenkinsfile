@@ -5,13 +5,12 @@ pipeline {
         registryCredential = 'Dockerhub'
         dockerImage = ''
     }
-
     agent none
     stages { 
         stage ('Build') {
             agent any
             steps {
-                sh 'mvn clean install package' 
+                bat 'mvn clean install package' 
             }
         }
 
