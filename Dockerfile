@@ -2,7 +2,7 @@ FROM openjdk:11
 
 RUN mkdir /apps
 
-COPY C:/ProgramData/Jenkins/.jenkins/workspace/springbootwebapp-pipeline1/target/*.jar /apps/webapps.jar
+COPY ~/ProgramData/Jenkins/.jenkins/workspace/springbootwebapp-pipeline1/target/*.jar /apps/webapps.jar
 
 EXPOSE 8084
 
