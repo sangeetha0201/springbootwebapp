@@ -2,7 +2,7 @@ FROM openjdk:11
 
 RUN mkdir /apps
 
-COPY ${jar_FILE} /apps/webapps.jar
+COPY target/*.war /apps/webapps.jar
 
 EXPOSE 8084
 
