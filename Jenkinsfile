@@ -32,12 +32,5 @@ pipeline {
                 } 
             }
         }
-
-        stage('Cleaning up') { 
-            agent { label 'slave1'}
-            steps { 
-                sh "docker rmi $registry:$BUILD_NUMBER" 
-            }
-        } 
     }
 }
