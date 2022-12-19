@@ -26,8 +26,8 @@ pipeline {
             agent { label 'slave1'}
             steps { 
                 script { 
-                  sh  docker.withRegistry( '', registryCredential ) { 
-                        dockerImage.push() 
+                    docker.withRegistry( '', registryCredential ) { 
+                    dockerImage.push() 
                     }
                 } 
             }
