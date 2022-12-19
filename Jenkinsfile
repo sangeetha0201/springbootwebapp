@@ -5,17 +5,15 @@ pipeline {
         registryCredential = 'dockerhub'
         dockerImage = ''
     }
-    agent none
+    agent { label 'slave1'}
     stages { 
         stage ('Build') {
-            agent any
             steps {
-                bat 'mvn clean install package' 
+                sh 'mvn -DskipTests clean install package' 
             }
         }
 
         stage ('Build Docker image') {
-            agent { label 'slave1'}
             steps {
                 script { 
                  sh dockerImage = docker.build registry + ":$BUILD_NUMBER" 
@@ -23,7 +21,6 @@ pipeline {
             }
         }
         stage('Deploy our image into Registry') { 
-            agent { label 'slave1'}
             steps { 
                 script { 
                     docker.withRegistry( '', registryCredential ) { 
