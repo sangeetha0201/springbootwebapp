@@ -1,26 +1,40 @@
- agent any
+
+pipeline {
+    environment {
+        registry = "sandeep4642/springbootwebapps" 
+        registryCredential = 'Dockerhub'
+        dockerImage = ''
+    }
+
+    agent any
     stages {
-        stage('maven built'){
-            steps{
-                sh 'mvn clean install package'
+        stage ('Build') {
+            steps {
+                sh 'mvn clean install package' 
             }
         }
-        stage('print'){
-            steps{
-                echo "welcome "
+
+        stage ('Build Docker image') {
+            steps {
+                script { 
+                  dockerImage = docker.build registry + ":$BUILD_NUMBER" 
+            } 
             }
         }
-            stage('compile'){
-                steps{
-                    sh 'pwd'
-                }
+        stage('Deploy our image into Registry') { 
+            steps { 
+                script { 
+                    docker.withRegistry( '', registryCredential ) { 
+                        dockerImage.push() 
+                    }
+                } 
             }
-
         }
-    
 
-
-
-
-
-
+        stage('Cleaning up') { 
+            steps { 
+                sh "docker rmi $registry:$BUILD_NUMBER" 
+            }
+        } 
+    }
+}
