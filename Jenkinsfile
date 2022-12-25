@@ -2,7 +2,7 @@
 pipeline {
     environment {
         registry = "sandeep4642/springbootwebapps" 
-        registryCredential = 'dockerhub'
+        registryCredential = 'dockerhub-creds'
         dockerImage = ''
     }
     agent { label 'docker-slave'}
